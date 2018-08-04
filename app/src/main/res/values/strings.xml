@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SimplyTodo</string>
+    <string name="add_note_title">Enter the note..</string>
+    <string name="add_note_content">Enter content of note..</string>
+</resources>
