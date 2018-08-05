@@ -4,17 +4,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.pcforgeek.simplytodo.data.DateConverter
 import com.pcforgeek.simplytodo.data.dao.NoteDAO
 import com.pcforgeek.simplytodo.data.entity.Notes
 import com.pcforgeek.simplytodo.utils.ioThread
+import java.util.*
 
-/**
- * Created by
- *      JOEL JACOB(@pcforgeek)
- *       on 26/7/18.
- */
 @Database(entities = arrayOf(Notes::class), version = 1)
+@TypeConverters(DateConverter::class)
 abstract class NotesDatabase : RoomDatabase() {
 
     //We have to create an abstract method for every DAO class that we create. This is really important.
@@ -22,12 +21,12 @@ abstract class NotesDatabase : RoomDatabase() {
 
     companion object {
         private val PRE_POP_DB = listOf<Notes>(
-                Notes(null, "", "title1", "content"),
-                Notes(null, "", "title2", "content"),
-                Notes(null, "", "title3", "content"),
-                Notes(null, "", "title4", "content"),
-                Notes(null, "", "title5", "mutliline mutliline mutliline mutliline mutliline mutliline mutliline mutliline content"),
-                Notes(null, "", "title6", "content"))
+                Notes(null, Date(), "title1", "content"),
+                Notes(null, Date(), "title2", "content"),
+                Notes(null, Date(), "title3", "content"),
+                Notes(null, Date(), "title4", "content"),
+                Notes(null, Date(), "title5", "mutliline mutliline mutliline mutliline mutliline mutliline mutliline mutliline content"),
+                Notes(null, Date(), "title6", "content"))
         @Volatile
         private var INSTANCE: NotesDatabase? = null
 

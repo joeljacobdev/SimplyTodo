@@ -1,17 +1,26 @@
 package com.pcforgeek.simplytodo.data.entity
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.ColumnInfo
+import androidx.room.*
+import com.pcforgeek.simplytodo.data.DateConverter
+import java.util.*
 
-/**
- * Created by
- *      JOEL JACOB(@pcforgeek)
- *       on 26/7/18.
- */
 @Entity(tableName = "notes")
-data class Notes(@PrimaryKey(autoGenerate = true) val uuid: Long? = null,
-                 @ColumnInfo(name = "date") val date: String = "",
-                 @ColumnInfo(name = "tile") val title: String,
-                 @ColumnInfo(name = "content") val content: String
-)
+class Notes {
+    @PrimaryKey(autoGenerate = true)
+    var uuid: Long? = null
+    @ColumnInfo(name = "date")
+    @TypeConverters(DateConverter::class)
+    var date: Date? = null
+    @ColumnInfo(name = "tile")
+    var title: String = ""
+    @ColumnInfo(name = "content")
+    var content: String = ""
+
+    constructor(uuid: Long?, date: Date, title: String, content: String) {
+        this.uuid = uuid
+        this.date = date
+        this.title = title
+        this.content = content
+    }
+
+}

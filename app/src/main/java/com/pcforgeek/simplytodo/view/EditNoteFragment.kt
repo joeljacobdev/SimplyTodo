@@ -15,6 +15,7 @@ import com.pcforgeek.simplytodo.data.entity.Notes
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.edit_note_fragment.*
 import kotlinx.android.synthetic.main.edit_note_fragment.view.*
+import java.util.Date
 
 private const val ARG_ACTION = "action"
 private const val ARG_UUID = "uuid"
@@ -91,7 +92,7 @@ class EditNoteFragment : Fragment() {
 
     private fun updateNote() {
         if (!itemContent.text.isNullOrBlank() || !itemTitle.text.isNullOrBlank()) {
-            val notes = Notes(uuid, "", itemTitle.text.toString(), itemContent.text.toString())
+            val notes = Notes(uuid, Date(), itemTitle.text.toString(), itemContent.text.toString())
             viewModel.updateNote(notes)
         }
     }
@@ -99,7 +100,7 @@ class EditNoteFragment : Fragment() {
     private fun insertNote() {
         //blank will ignore whitespaces
         if (!itemContent.text.isNullOrBlank() || !itemTitle.text.isNullOrBlank()) {
-            val notes = Notes(null, "", itemTitle.text.toString(), itemContent.text.toString())
+            val notes = Notes(null, Date(), itemTitle.text.toString(), itemContent.text.toString())
             viewModel.insertNote(notes)
         }
     }

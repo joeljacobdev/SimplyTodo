@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.pcforgeek.simplytodo.R
 import com.pcforgeek.simplytodo.data.entity.Notes
+import java.util.Date
 
 private const val EDIT_FRAG = "editFragment"
 
@@ -13,6 +14,7 @@ class NoteHolder(itemView: View, private val context: Context) : RecyclerView.Vi
     private val contentText: TextView = itemView.findViewById(R.id.note_content)
     private val titleText: TextView = itemView.findViewById(R.id.note_title)
     private var uuid: Long = 0
+    private var date: Date? = null
 
     init {
         itemView.setOnClickListener(this)
@@ -22,6 +24,7 @@ class NoteHolder(itemView: View, private val context: Context) : RecyclerView.Vi
         uuid = note.uuid!!
         titleText.text = note.title
         contentText.text = note.content
+        date = note.date
     }
 
     override fun onClick(view: View?) {
