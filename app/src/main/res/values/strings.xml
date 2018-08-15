@@ -2,4 +2,7 @@
     <string name="app_name">SimplyTodo</string>
     <string name="add_note_title">Enter the note..</string>
     <string name="add_note_content">Enter content of note..</string>
+    <string name="tag_menu_title">Tag</string>
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
 </resources>
