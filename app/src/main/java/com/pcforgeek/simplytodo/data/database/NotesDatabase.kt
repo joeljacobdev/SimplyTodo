@@ -7,17 +7,21 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.pcforgeek.simplytodo.data.DateConverter
+import com.pcforgeek.simplytodo.data.dao.LabelDAO
 import com.pcforgeek.simplytodo.data.dao.NoteDAO
+import com.pcforgeek.simplytodo.data.entity.Label
 import com.pcforgeek.simplytodo.data.entity.Notes
 import com.pcforgeek.simplytodo.utils.ioThread
 import java.util.*
 
-@Database(entities = arrayOf(Notes::class), version = 1)
+@Database(entities = arrayOf(Notes::class, Label::class), version = 1)
 @TypeConverters(DateConverter::class)
 abstract class NotesDatabase : RoomDatabase() {
 
     //We have to create an abstract method for every DAO class that we create. This is really important.
     abstract fun notesDataDao(): NoteDAO
+
+    abstract fun labelDao(): LabelDAO
 
     companion object {
         private val PRE_POP_DB = listOf<Notes>(
@@ -41,6 +45,10 @@ abstract class NotesDatabase : RoomDatabase() {
                                     ioThread {
                                         for (data in PRE_POP_DB)
                                             getInstance(context)!!.notesDataDao().insertNote(data)
+                                    }
+                                    ioThread {
+                                        getInstance(context)!!.labelDao().addLabel(Label(null, "default"))
+                                        getInstance(context)!!.labelDao().addLabel(Label(null, "first-tag"))
                                     }
                                 }
                             })

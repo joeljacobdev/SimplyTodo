@@ -22,12 +22,15 @@ interface NoteDAO {
     fun updateNote(notesData: Notes)
 
     @Query("SELECT * from notes where uuid LIKE :noteId")
-    fun getNote(noteId: Long?) : Notes
+    fun getNote(noteId: Long?): Notes
 
     @Query("DELETE from notes")
     fun deleteAllNotes()
 
     @Delete
     fun deleteNote(notesData: Notes)
+
+    @Query("SELECT * from notes where label_id = :labelId")
+    fun getNotesWithLabelId(labelId: Int): List<Notes>
 
 }

@@ -17,6 +17,8 @@ class ViewModelFactory(repo: NotesRepository): ViewModelProvider.Factory {
                 return NotesListViewModel(repository) as T
         } else if (modelClass.isAssignableFrom(EditNoteViewModel::class.java)) {
             return EditNoteViewModel(repository) as T
+        } else if (modelClass.isAssignableFrom(LabelViewModel::class.java)) {
+            return LabelViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
